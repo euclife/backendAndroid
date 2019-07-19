@@ -5,89 +5,91 @@ dotenv.config();
 
 const User = require('../Models/user');
 
-
-module.exports.postRegister = (req,res) =>{
-
-    var salt = bcrypt.genSaltSync(10);
-    var hash = bcrypt.hashSync(req.body.password, salt);
-    var tokens = "";
-    var key1 = 'status';
-    var key2 = 'message';
-    var key3 = 'result';
-    var o = {} 
-    User 
-        .findOrCreate({
-            where:{
-               email: req.body.email
-            },
-            defaults:{
-                nama: req.body.nama,
-                password: hash,
-                roles: req.body.roles
-            }
-        })
+module.exports.getUser = (req, res) => {
+    User.findAll({
+        where: {
+        role:"user"
+        }
+    })
         .then((user)=>{
-            jwt.sign({
-                id:user.get('id'),
-                nama:user.get('nama'),
-                roles: user.get('roles')
-                }, process.env.SECRETKEY, (error, token)=>{
-                    tokens = token
-                });
-
-            User
-                .update({
-                    token : tokens
-                    },
-                    where:{
-                        id : user.get('id')
-                    })
-
-            o.[key1].push("200");
-            o.[key2],push("Success");
-            o.[key3].push(user);
-            res.contentType('application/json');
-            res.send(JSON.stringify(o));
+            res.json({
+            "status" : 200,
+            "message" : "success",
+            "user" : user
+           })
         })
-        .catch((error)=>{
-            o.[key1].push("404");
-            o.[key2],push("Error");
-            res.contentType('application/json');
-            res.send(JSON.stringify(o));
-        })
-}
-
-module.exports.postLogin = (req,res) =>{
-    var key1 = 'status';
-    var key2 = 'message';
-    var key3 = 'result';
-    User.findOne({
-        where:{
-            nama: req.body.nama
-        }
-    }).then(user=>{
-        if(!user){
-            res.status(400).send('nama Tidak Ditemukan');
-        }else{
-            bcrypt.compare(req.body.password, user.get('password'),function (err, isMatch){
-                if(err){
-                    res.status(400).send('Password Error');
-                }
-                if (isMatch) {
-                    jwt.sign({
-                        id:user.get('id'),
-                        nama:user.get('nama'),
-                        roles: user.get('roles')
-                        }, process.env.SECRETKEY, (error, token)=>{
-                        res.json({token:token});
-                    })
-                }else{
-                    res.status(400).send('Password Salah')
-                }
-            })
-        }
+        .catch((error) => {
+            console.log(error);
     })
 }
 
+module.exports.postRegister = (req, res) => {
+    console.log(req.body.password);
+    var salt = bcrypt.genSaltSync(10);
+    var hash = bcrypt.hashSync(req.body.password, salt);
+    // if (req.body.voucher == "") {}
+    User
+        .findOrCreate({
+            where: { email: req.body.email },
+            defaults: {
+                nama: req.body.nama,
+                email: req.body.email,
+                password: hash,
+                role: req.body.role
+            }
+        })
+        .then((user)=>{
+           res.json({
+            "status" : 200,
+            "message" : "success",
+            "user" : user
+           })
+        })
+        .catch((error)=>{
+            res.json(error);
+        })
+}
 
+module.exports.postLogin = (req, res) => {
+    User.findOne({
+        where: {
+            email: req.body.email
+        }
+    }).then(user => {
+        if (!user) {
+            res.json({
+                "status" : 400,
+                "message": "User Tidak ditemukan"
+            })
+        }
 
+        bcrypt.compare(req.body.password, user.get('password'), function (err, isMatch){
+            if (err) {
+                res.json({
+                "status" : 400,
+                "message": "Password Salah"
+            })
+            };
+
+            if(isMatch) {
+                jwt.sign({ 
+                    id: user.get('id'),
+                    nama: user.get('nama'),
+                    role: user.get('role')
+                    }, process.env.SECRETKEY, (error, token) => {
+                    res.json({ 
+                        "status" : 200,
+                        "message": "success",
+                        "token" : token ,
+                        "user" : user
+                    });
+                })
+            } else {
+                 res.json({
+                "status" : 400,
+                "message": "Password Salah"
+            })
+            }
+        })
+    })
+}

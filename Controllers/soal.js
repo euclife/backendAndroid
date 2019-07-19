@@ -1,0 +1,1 @@
+const Soal = require('../Models/soal');
