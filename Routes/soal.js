@@ -1,6 +1,6 @@
 const express = require('express');
 
-const SoalController = require('../Controllers/soal');
+const SoalController = require('../controllers/soal');
 
 const router = express.Router();
 

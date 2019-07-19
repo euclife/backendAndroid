@@ -1,6 +1,6 @@
 const Sequelize = require('sequelize');
 
-const sequelize = require('../Configs/sequelize');
+const sequelize = require('../configs/sequelize');
 
 class Score extends Sequelize.Model {}
 
