@@ -7,7 +7,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json()); // support json encoded bodies
 
 // routes
-const scoreRouter = require('/routes/score');
+const scoreRouter = require('./routes/score');
 const userRouter = require('/routes/user');
 const soalRouter = require('/routes/soal');
 const jawabanRouter = require('/routes/jawaban');
