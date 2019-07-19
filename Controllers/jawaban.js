@@ -1,1 +1,1 @@
-const Jawaban = require('../Models/jawaban');
+const Jawaban = require('../models/jawaban');

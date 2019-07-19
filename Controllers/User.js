@@ -3,7 +3,7 @@ const jwt = require('jsonwebtoken');
 const dotenv = require('dotenv');
 dotenv.config();
 
-const User = require('../Models/user');
+const User = require('../models/user');
 
 module.exports.getUser = (req, res) => {
     User.findAll({

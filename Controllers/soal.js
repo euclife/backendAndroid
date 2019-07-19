@@ -1,1 +1,1 @@
-const Soal = require('../Models/soal');
+const Soal = require('../models/soal');
