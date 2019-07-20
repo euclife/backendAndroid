@@ -1,15 +1,15 @@
 const Score = require('../Models/score');
 
 module.exports.getNilai = (req,res) => {
-	Jawaban.findAll({
+	Score.findAll({
 		where: {
 			id_user: req.params.id
 		}
-	}).then(jawaban => {
+	}).then(score => {
 		res.json({
 			"status" : 200,
 			"message" : "success",
-			"nilai" : jawaban
+			"nilai" : score
 		});
 		
 	});
