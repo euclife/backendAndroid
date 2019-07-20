@@ -8,7 +8,7 @@ app.use(bodyParser.json()); // support json encoded bodies
 
 // Routes
 const sequelize = require('./Configs/Sequelize');
-const userRouter = require('./Routes/user');
+const userRouter = require('./Routes/User');
 const soalRouter = require('./Routes/soal');
 const jawabanRouter = require('./Routes/jawaban');
 const scoreRouter = require('./Routes/score');
@@ -17,7 +17,7 @@ const scoreRouter = require('./Routes/score');
 // Models
 const Score = require('./Models/score');
 const Jawaban = require('./Models/jawaban');
-const User = require('./Models/User');
+const User = require('./Models/user');
 const Soal = require('./Models/soal');
 
 
