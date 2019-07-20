@@ -17,7 +17,7 @@ const scoreRouter = require('./Routes/score');
 // Models
 const Score = require('./Models/score');
 const Jawaban = require('./Models/jawaban');
-const User = require('./Models/user');
+const User = require('./Models/User');
 const Soal = require('./Models/soal');
 
 
