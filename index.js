@@ -14,7 +14,6 @@ const jawabanRouter = require('./routes/jawaban');
 const scoreRouter = require('./routes/score');
 
 
-
 // Models
 const Score = require('./models/score');
 const Jawaban = require('./models/jawaban');
