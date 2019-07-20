@@ -1,1 +1,1 @@
-const Score = require('../models/score');
+const Score = require('../Models/score');

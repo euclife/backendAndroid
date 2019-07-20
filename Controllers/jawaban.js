@@ -1,4 +1,4 @@
-const Jawaban = require('../models/jawaban');
+const Jawaban = require('../Models/jawaban');
 
 const jwt = require('jsonwebtoken');
 const dotenv = require('dotenv');

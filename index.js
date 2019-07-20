@@ -6,19 +6,19 @@ const app = express();
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json()); // support json encoded bodies
 
-// routes
-const sequelize = require('./configs/sequelize');
-const userRouter = require('./routes/user');
-const soalRouter = require('./routes/soal');
-const jawabanRouter = require('./routes/jawaban');
-const scoreRouter = require('./routes/score');
+// Routes
+const sequelize = require('./Configs/Sequelize');
+const userRouter = require('./Routes/user');
+const soalRouter = require('./Routes/soal');
+const jawabanRouter = require('./Routes/jawaban');
+const scoreRouter = require('./Routes/score');
 
 
 // Models
-const Score = require('./models/score');
-const Jawaban = require('./models/jawaban');
-const User = require('./models/user');
-const Soal = require('./models/soal');
+const Score = require('./Models/score');
+const Jawaban = require('./Models/jawaban');
+const User = require('./Models/user');
+const Soal = require('./Models/soal');
 
 
 app.use('/score', scoreRouter);

@@ -1,7 +1,7 @@
 const express = require('express');
 
-const SoalController = require('../controllers/soal');
-const auth = require('../configs/auth');
+const SoalController = require('../Controllers/soal');
+const auth = require('../Configs/auth');
 
 const router = express.Router();
 
